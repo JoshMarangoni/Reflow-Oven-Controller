@@ -5,7 +5,6 @@ import matplotlib.animation as animation
 import sys, time, math
 import serial
 from lib import lib
-#lib = lib(token="tok_dev_SqRWWzC3ToEV7gRLAYQWQUayTW57DkfvhtKx95eEtX2CJyvAaEUkH72mhp6jUYpr")
 sms = lib.utils.sms["@1.0.9"]
 
 # configure the serial port

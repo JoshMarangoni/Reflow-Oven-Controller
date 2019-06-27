@@ -1,21 +1,6 @@
  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-  ; File:    main.asm 
-  ; 
-  ; Author1 :   Ebi Sadeghi 
-  ; Author2 :   Justin Scott
-  ; Author3 : 	Joshua Marangoni 
-  ;	Author4 : 	Henry Bryant
-  ; Author5 : 	Yousof Al-Autman
-  ;	Author6 :	Robert Migut
-  ; Date    :   Winter 2019
-  ; Course  :   ELEC 291 Electrical Design Studio I
-  ; 
-  ; Description: 
-  ; 
-  ; This is the main for the solder reflow oven 
-
-  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
+; File:    main.asm 
+;
 ; Access to the input pins of the ADC is avalible at connector J15. Here is the top
 ; view of the connector:
 ;
@@ -35,8 +20,6 @@
 ; + IN0 | 5V  |
 ; +-----+-----+
 ;      J15
-;
-; (c) Jesus Calvino-Fraga 2019
 ;
 
 $NOLIST
@@ -98,7 +81,6 @@ org 0x002B
 
 $NOLIST     ;do we need this twice?
 $include(math32.inc)
-;$include(serial.inc)
 $include(LCD_4bit_DE1Soc.inc)
 $include(set_values.asm)
 $include(EEPROM_P1.asm)
@@ -109,7 +91,6 @@ x: 			ds 4
 y: 			ds 4
 bcd: 		ds 5
 tc: 		ds 4
-;timer: 	ds 2
 temp: 		ds 4
 save: 		ds 4
 
@@ -122,8 +103,7 @@ Temp_abrt: 	ds 1 ;Set to 230C
 Time_refl: 	ds 1 ;Set to 45s
 Temp_cool: 	ds 1 ;Set to 60C
 pwm_on:	   	ds 2 ;Oven controller
-pwm_off:   	ds 2 ;
-;pwm_total:
+pwm_off:   	ds 2 
 sec: 	   	ds 1
 seconds:	ds 1
 minutes: 	ds 1
@@ -494,23 +474,6 @@ T_7seg:
 ; Display the 4-digit bcd stored in [R3,R2] using the 7-segment displays
 Display_BCD:
 	mov dptr, #T_7seg
-	;Display the channel in HEX5
-	;mov a, b
-	;anl a, #0x0f
-	;movc a, @a+dptr
-
-	;mov HEX5, a
-	;mov a, state
-	;anl a, #0x0f
-	;movc a, @a+dptr
-	;mov HEX5, a
-	
-	;Display [R3,R2] in HEX3, HEX2, HEX1, HEX0
-	;mov a, bcd+1
-	;swap a
-	;anl a, #0x0f
-	;movc a, @a+dptr
-;	mov HEX3, a
 	
 	mov a, bcd+1
 	anl a, #0x0f
@@ -580,15 +543,7 @@ MainProgram:
 	mov state, #0	
 
 	lcall Load_Configuration
-	;call Load_Defaults
-	;lcall Test_menu
 	lcall Save_Configuration
-	;mov temp_soak, #150
-    ;mov Time_soak, #60
-    ;mov Temp_refl, #217
-    ;mov Temp_abrt, #230
-    ;mov Time_refl, #45
-    ;mov Temp_cool, #60
     clr seconds_flag
 	clr StateChanged
 	mov CountBuzz, #0
@@ -614,18 +569,8 @@ forever:
 	;convert cold junction voltage to temperature
 	load_y(2730)
 	lcall sub32
-	
-	;LM355 calibration
 	load_y(152)
 	lcall sub32
-	
-	;lcall hex2bcd
-	;Set_Cursor(1,11)
-	;Display_BCD_DE1(bcd+1)
-	;Display_BCD_DE1(bcd)
-	;Set_Cursor(1,11)
-	;WriteData(#' ')
-	
 	load_y(1000)
 	lcall mul32
 	mov tc, x
@@ -645,7 +590,6 @@ forever:
 	mov x+3, #0
 	load_y(806)
 	lcall mul32
-	;load_y(18000)
 	mov y, tc
 	mov y+1, tc+1
 	mov y+2, tc+2
@@ -664,9 +608,6 @@ forever:
 	Send_Constant_String(#P_STATE)
 	WriteCommand(#0x89)
 	WriteData(#' ')
-	;jnb StateChanged, noBuzzer
-	;WriteCommand(#0x89)
-	;WriteData(#'A')
 	lcall Set_LEDS
 	
 	mov a, state
@@ -687,7 +628,6 @@ next1:
 	mov x+3, #0
     lcall hex2bcd
 	Display_BCD_DE1(bcd)
-	
 
 	
 ;-------------------------STATE MACHINE ------------------------------------------------------
@@ -710,12 +650,10 @@ state0: ;This state just starts the solder reflow oven controller
     cjne a, #0, state1
     WriteCommand(#0x82)
     WriteData(#'0')
-	;Send_Constant_String(#CLEAR)
     WriteCommand(#0xC0)
     Send_Constant_String(#P_STATE_0)
     mov pwm_on+0, #low(1000)
 	mov pwm_on+1, #high(1000)
-    ;mov pwmf, #0 ;Turn Fan Off (Uncomment when ready to use this)
     jb KEY.3, state0_done
     jnb KEY.3, $ ; Wait for key release
 	;visually see in graph when FSM starts
@@ -895,8 +833,6 @@ state5: ; This is the cooling state
     Send_Constant_String(#P_STATE_5)
 	mov pwm_on+0, #low(1000)
 	mov pwm_on+1,#high(1000)
-   ; clr PULSE
-	;mov pwmf, #0 ;Turn the fan on (Uncomment when we get to this stage)
 	mov a, Temp_cool
 	clr c
 	subb a, temp

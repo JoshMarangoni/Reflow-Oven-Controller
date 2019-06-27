@@ -411,12 +411,6 @@ Load_Defaults: ; Load defaults if keys are incorrect
     mov Temp_abrt, #240
     mov Time_refl, #45
     mov Temp_cool, #60
-    ;temp_soak 150C ;
-    ;Time_soak 60s
-    ;Temp_refl 217C
-    ;Temp_abrt 230C
-    ;Time_refl 45s
-    ;Temp_cool 60C
     ret
 
 

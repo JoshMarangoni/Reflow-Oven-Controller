@@ -1,19 +1,4 @@
 $NOLIST
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-  ; File:    clock.asm
-  ; 
-  ; Author1 :   Ebi Sadeghi 
-  ; Author2 :   Justin Scott
-  ; Author3 : 	Josh Marangoni 
-  ;	Author4 : 	Henry Bryant
-  ; Author5 : 	Yousof Al-Autman
-  ;	Author6 :	Robert Migut
-  ; Date    :   Winter 2019
-  ; Course  :   ELEC 291 Electrical Design Studio I
-  ; 
-  ; Description: Clock code
-
-
 CSEG
   ; For communicating with FSM
   ; 
