@@ -6,5 +6,5 @@ Other software contributors: Henry Bryant, Yousof Al Autman, Justin Scott
 
 <p align="center">
   <br>
-  <img src="Reflow_Controller.jpg" width="300">
+  <img src="Reflow_Controller.jpg" width="400">
 </p>
