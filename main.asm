@@ -1,5 +1,19 @@
  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; File:    main.asm 
+  ; Author1 :   Joshua Marangoni
+  ; Author2 :   Justin Scott
+  ; Author3 : 	Ebi Sadeghi 
+  ; Author4 : 	Henry Bryant
+  ; Author5 : 	Yousof Al-Autman
+  ; Author6 :	Robert Migut
+  ; Date    :   Winter 2019
+  ; Course  :   ELEC 291 Electrical Design Studio I
+  ; 
+  ; Description: 
+  ; 
+  ; This is the main for the solder reflow oven 
+
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;
 ; Access to the input pins of the ADC is avalible at connector J15. Here is the top
 ; view of the connector:

@@ -39,13 +39,13 @@ def run(data):
     if (t>180) & (y < 55):
         
         result = sms(
-        to="7789843955", # (required)
+        to="", # (required)
         body="PCB Soldering completed!" # (required)
         )
         sys.exit(0)
     if (t>65) & (y < 49):
         result = sms(
-        to="7789843955", # (required)
+        to="", # (required)
         body="Abort! Check Thermocouple connection!" # (required)
         )
         sys.exit(0)
