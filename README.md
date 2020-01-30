@@ -6,3 +6,10 @@ A reflow oven is a machine used primarily for reflow soldering of surface mount 
   <br>
   <img src="Reflow_Controller.jpg" width="500">
 </p>
+
+Stripchart of temperature vs time, created with Python:
+
+<p align="center">
+  <br>
+  <img src="Test_NO_13_SD.jpg" width="500">
+</p>
